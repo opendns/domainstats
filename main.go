@@ -20,16 +20,15 @@ import (
 	"runtime"
 	"sync"
 
-	domainstats "github.com/dead10ck/domainstats/lib"
+	domainstats "github.com/dead10ck/domainstats/internal"
 	"github.com/dead10ck/goinvestigate"
 )
 
 type opt struct {
-	verbose       bool
-	setup         string
-	outFile       string
-	configPath    string
-	maxGoroutines int
+	verbose    bool
+	setup      string
+	outFile    string
+	configPath string
 }
 
 var (
@@ -47,8 +46,6 @@ func init() {
 
 func main() {
 
-	flag.IntVar(&opts.maxGoroutines, "m", DEFAULT_MAX_GOROUTINES,
-		"Maximum number of goroutines to use for parallel HTTP requests")
 	flag.BoolVar(&opts.verbose, "v", false, "Print out verbose log messages.")
 	flag.StringVar(&opts.setup, "setup", "",
 		"Generate a default config file in ~/.domainstats/default.toml with"+
@@ -193,12 +190,12 @@ func getInfo(config *domainstats.Config, inv *goinvestigate.Investigate, domainC
 	wg := new(sync.WaitGroup)
 
 	// launch the query goroutines
-	for i := 0; i < opts.maxGoroutines; i++ {
+	for i := 0; i < DEFAULT_MAX_GOROUTINES; i++ {
 		go query(qChan)
 	}
 
 	// launch the processor goroutines
-	for i := 0; i < opts.maxGoroutines; i++ {
+	for i := 0; i < DEFAULT_MAX_GOROUTINES; i++ {
 		wg.Add(1)
 		go process(inv, config, domainChan, qChan, outChan, wg)
 	}

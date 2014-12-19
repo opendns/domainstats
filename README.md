@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/dead10ck/domainstats.svg?branch=master)](https://travis-ci.org/dead10ck/domainstats)
 # domainstats
 `domainstats` is a tool to query the
 [OpenDNS Investigate](https://sgraph.opendns.com/main) API using a list of domains,
@@ -43,7 +44,7 @@ $ godep go install
 The default config file has all options set to true.
 
 ```toml
-APIKey = "c426026e-6886-4499-ab92-6fdd8b53e155"
+APIKey = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 Status = true
 
 [Categories]
@@ -130,7 +131,7 @@ If you only want, e.g., status, cooccurrences, RIP scores, and threat type, you 
 a config file like so:
 
 ```toml
-APIKey = "c426026e-6886-4499-ab92-6fdd8b53e155"
+APIKey = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 Status = true
 
 [Cooccurrences]

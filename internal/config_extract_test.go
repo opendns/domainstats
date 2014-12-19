@@ -490,8 +490,8 @@ func TestExtractDomainTagInfo(t *testing.T) {
 	}
 
 	ref := []string{
-		"http://ancgrli.prophp.org/:Malware:2014-04-07:Current",
-		"http://ancgrli.prophp.org/34/45791.html:Malware:2014-03-04:2014-03-05",
+		"http://ancgrli.prophp.org/:Malware:2014-04-07:Current, " +
+			"http://ancgrli.prophp.org/34/45791.html:Malware:2014-03-04:2014-03-05",
 	}
 	test, _ := config.ExtractCSVSubRow(dt)
 	if !strSliceEq(ref, test) {
@@ -502,8 +502,8 @@ func TestExtractDomainTagInfo(t *testing.T) {
 	config.TaggingDates.Category = false
 	config.TaggingDates.Begin = false
 	ref = []string{
-		"http://ancgrli.prophp.org/:Current",
-		"http://ancgrli.prophp.org/34/45791.html:2014-03-05",
+		"http://ancgrli.prophp.org/:Current, " +
+			"http://ancgrli.prophp.org/34/45791.html:2014-03-05",
 	}
 	test, _ = config.ExtractCSVSubRow(dt)
 	if !strSliceEq(ref, test) {

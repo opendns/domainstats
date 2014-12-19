@@ -122,6 +122,10 @@ func (c *Config) extractSecurityFeaturesInfo(resp *goinvestigate.SecurityFeature
 
 // dynamic field. Should return a singleton list
 func (c *Config) extractDomainTagInfo(resp []goinvestigate.DomainTag) []string {
+	if !any(c.TaggingDates) {
+		return []string{}
+	}
+
 	dtStrs := []string{}
 	for _, dt := range resp {
 		fieldStrs := []string{}
@@ -141,7 +145,7 @@ func (c *Config) extractDomainTagInfo(resp []goinvestigate.DomainTag) []string {
 		return []string{""}
 	}
 
-	return dtStrs
+	return []string{strings.Join(dtStrs, ", ")}
 }
 
 func (c *Config) extractDomainRRHistoryInfo(resp *goinvestigate.DomainRRHistory) []string {
